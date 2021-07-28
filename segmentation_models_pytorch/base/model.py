@@ -5,10 +5,15 @@ from . import initialization as init
 class SegmentationModel(torch.nn.Module):
 
     def initialize(self):
-        init.initialize_decoder(self.decoder)
-        init.initialize_head(self.segmentation_head)
-        if self.classification_head is not None:
-            init.initialize_head(self.classification_head)
+        init.initialize_decoder(self.decoder_lane)
+        init.initialize_decoder(self.decoder_depth)
+        init.initialize_head(self.segmentation_head_lane)
+        init.initialize_head(self.segmentation_head_depth)
+        if self.classification_head_lane is not None:
+            if self.classification_head_depth is not None:
+                init.initialize_head(self.classification_head_lane)
+                init.initialize_head(self.classification_head_depth)
+
 
     def forward(self, x):
         """Sequentially pass `x` trough model`s encoder, decoder and heads"""
