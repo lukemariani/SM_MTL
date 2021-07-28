@@ -87,6 +87,13 @@ class Unet(SegmentationModel):
             kernel_size=3,
         )
 
+        if aux_params is not None:
+            self.classification_head_lane = ClassificationHead(
+                in_channels=self.encoder.out_channels[-1], **aux_params
+            )
+        else:
+            self.classification_head_lane = None
+
 		#depth decoder
         self.decoder_depth = UnetDecoder(
             encoder_channels=self.encoder.out_channels,
@@ -103,13 +110,14 @@ class Unet(SegmentationModel):
             activation=activation,
             kernel_size=3,
         )
-
+			
         if aux_params is not None:
-            self.classification_head = ClassificationHead(
+            self.classification_head_depth = ClassificationHead(
                 in_channels=self.encoder.out_channels[-1], **aux_params
             )
         else:
-            self.classification_head = None
+            self.classification_head_depth = None
+
 
         self.name = "u-{}".format(encoder_name)
         self.initialize()
