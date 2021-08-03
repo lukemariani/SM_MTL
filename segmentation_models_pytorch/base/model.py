@@ -21,11 +21,11 @@ class SegmentationModel(torch.nn.Module):
 		
 		# lane branch
         decoder_output_lane = self.decoder_lane(*features)
-        masks_lane = self.segmentation_head(decoder_output_lane)
+        masks_lane = self.segmentation_head_lane(decoder_output_lane)
 				
 		#depth branch
         decoder_output_depth = self.decoder_depth(*features)
-        masks_depth = self.segmentation_head(decoder_output_depth)
+        masks_depth = self.segmentation_head_depth(decoder_output_depth)
 
 		#classification head
         if self.classification_head_lane is not None:
