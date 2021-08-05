@@ -104,11 +104,18 @@ class Unet(SegmentationModel):
             attention_type=decoder_attention_type,
         )
 
-        self.segmentation_head_depth = SegmentationHead(
-            in_channels=decoder_channels[-1],
-            out_channels=classes_depth,
-            activation=activation,
-            kernel_size=3,
+        #self.segmentation_head_depth = SegmentationHead(
+        #    in_channels=decoder_channels[-1],
+        #    out_channels=classes_depth,
+        #    activation=activation,
+        #    kernel_size=3,
+        #)
+
+        self.segmentation_head_depth = LinearRegressionHead(
+                in_channels=decoder_channels[-1],
+                out_channels=classes_depth,
+                activation=activation,
+                kernel_size=3,
         )
 			
         if aux_params is not None:
