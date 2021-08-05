@@ -2,7 +2,7 @@ from typing import Optional, Union, List
 from .decoder import UnetDecoder
 from ..encoders import get_encoder
 from ..base import SegmentationModel
-from ..base import SegmentationHead, ClassificationHead
+from ..base import SegmentationHead, LinearRegressionHead, ClassificationHead
 
 
 class Unet(SegmentationModel):
