@@ -25,8 +25,7 @@ class SegmentationModel(torch.nn.Module):
 				
 		#depth branch
         decoder_output_depth = self.decoder_depth(*features)
-        print(decoder_output_depth)
-        print(decoder_output_depth.shape)
+        decoder_output_depth = decoder_output_depth.flatten(1,3)
         masks_depth = self.segmentation_head_depth(decoder_output_depth)
 
 		#classification head

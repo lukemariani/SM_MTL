@@ -112,8 +112,8 @@ class Unet(SegmentationModel):
         #)
 
         self.segmentation_head_depth = LinearRegressionHead(
-                in_channels=decoder_channels[-1],
-                out_channels=classes_depth,
+                in_channels=decoder_channels[-1]*640*640,
+                out_channels=640*640, #classes_depth,
                 activation=activation,
                 kernel_size=3,
         )
