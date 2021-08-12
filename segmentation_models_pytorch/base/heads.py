@@ -18,7 +18,7 @@ class LinearRegressionHead(nn.Sequential):
         conv2d = nn.Conv2d(in_channels, 1, kernel_size=1, padding=kernel_size // 2)
         #upsampling = nn.UpsamplingBilinear3d(scale_factor=upsampling) if upsampling > 1 else nn.Identity()
         #linear = nn.Linear(in_channels, out_channels, bias=True)
-        super().__init__(linear)
+        super().__init__(conv2d)
 
 
 class ClassificationHead(nn.Sequential):
